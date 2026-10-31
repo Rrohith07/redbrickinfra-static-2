@@ -1,0 +1,76 @@
+VS CODE / LIVE SERVER NOTE
+--------------------------
+Open this entire redbrickinfra_site_fixed folder in VS Code, then right-click the
+top-level index.html and choose "Open with Live Server" (install the Live
+Server extension if needed). Do not move individual HTML pages out of their
+folders. The nested pages use ../ paths to reach css/, js/, and assets/.
+
+A conflicting <base href="../"> element was removed from the four nested pages.
+It caused the browser to resolve their already-correct ../ asset and navigation
+paths from the website root a second time, breaking page styling/assets/links.
+
+RED BRICK INFRA — DEPLOYMENT QUICK GUIDE
+========================================
+
+THIS FOLDER IS THE WEBSITE ROOT
+--------------------------------
+When uploading to GitHub, upload the CONTENTS of this folder so that index.html
+is directly at the top level of the repository. Do not upload an extra enclosing
+folder that buries index.html one level down.
+
+OPTION A — SIMPLE GITHUB WEBSITE UPLOAD
+---------------------------------------
+1. Extract redbrickinfra_website_ready.zip on your computer.
+2. Open https://github.com/new and create a repository named
+   redbrickinfra-website.
+3. Open the repository, choose Add file > Upload files.
+4. Drag in all contents of this folder, including css, js, assets, about,
+   services, projects, and contact-us folders.
+5. Commit the upload.
+
+OPTION B — TERMINAL
+-------------------
+Open Terminal inside this extracted folder and run:
+
+  git init
+  git add .
+  git commit -m "Deploy Red Brick Infra website"
+  git branch -M main
+  git remote add origin https://github.com/YOUR-USERNAME/redbrickinfra-website.git
+  git push -u origin main
+
+Replace YOUR-USERNAME with your GitHub username. If GitHub asks you to sign in,
+use its supported browser/device flow; GitHub does not accept account passwords
+for Git operations over HTTPS.
+
+VERCEL SETTINGS
+---------------
+1. Visit https://vercel.com/new and import the GitHub repository.
+2. Framework Preset: Other.
+3. Root Directory: ./
+4. Build Command: leave blank / override disabled.
+5. Install Command: leave blank / override disabled.
+6. Output Directory: . (if required; otherwise leave the default for static files).
+7. Deploy.
+
+BEFORE CONNECTING YOUR CUSTOM DOMAIN
+------------------------------------
+- Test all pages: Home, About, Services, Projects, Contact Us.
+- Test the PDF, project video, images, mobile navigation, FAQ accordions,
+  project image lightbox, and enquiry form.
+- The enquiry form hands off to WhatsApp; it does not store submissions or send
+  email from a backend.
+- Confirm the displayed phone numbers and email addresses are correct.
+- sitemap.xml, robots.txt, canonical URLs, and social metadata currently use
+  https://redbrickinfra.in. Update these if you deploy to another domain.
+- The project video is about 21 MB; consider compressing it for mobile visitors.
+
+PACKAGE CHECKS PERFORMED
+------------------------
+- All 6 HTML documents parsed by a local HTML reference checker.
+- No missing local HTML references were found.
+- JavaScript syntax checks passed for js/site.js and js/data.js.
+- A local HTTP server returned HTTP 200 for all 5 page routes, 404.html,
+  CSS/JS, images, PDF, video, sitemap.xml, and robots.txt.
+- This does not substitute for checking the actual Vercel URL in a real browser
+  after deployment, including the WhatsApp handoff and mobile-device behavior.
